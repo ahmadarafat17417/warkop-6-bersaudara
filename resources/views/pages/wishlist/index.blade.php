@@ -2,79 +2,141 @@
 
 @section('page_title', 'Your Wishlist')
 
-@section('body_style', 'font-[Poppins]')
+@section('body_style', 'font-[Poppins] bg-gray-50')
 
 @section('page_content')
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold text-gray-800 mb-6">Your Wishlist</h1>
+    <div class="container px-4 py-12 mx-auto max-w-7xl">
+        <!-- Header dengan Breadcrumb -->
+        <div class="mb-8">
+            <nav class="flex mb-4 text-sm text-gray-500">
+                <a href="{{ route('products.index') }}" class="hover:text-blue-600">Home</a>
+                <span class="mx-2">/</span>
+                <a href="{{ route('wishlist.index') }}" class="hover:text-blue-600">Wishlist</a>
+            </nav>
+
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-light tracking-tight text-gray-900">My Wishlist</h1>
+                    <p class="mt-1 text-sm text-gray-500">Products you've saved for later</p>
+                </div>
+                <div class="flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm">
+                    <x-mdi-heart-outline class="w-5 h-5 text-gray-400" />
+                    <span class="text-sm font-medium text-gray-700">{{ $wishlistItems->count() }} Items</span>
+                </div>
+            </div>
+        </div>
 
         @if ($wishlistItems->isEmpty())
-            <div class="text-center py-12">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400" viewBox="0 0 24 24"
-                    fill="currentColor">
-                    <path
-                        d="M12.1 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.74 0 3.41 1.01 4.13 2.44h.74C13.09 5.01 14.76 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4 6.86-8.65 11.54l-1.45 1.31z" />
-                </svg>
-                <p class="mt-4 text-gray-600">Your wishlist is empty</p>
-                <a href="{{ route('products.index') }}"
-                    class="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-                    Browse Products
-                </a>
+            <div class="py-20 text-center bg-white border border-gray-100 shadow-sm rounded-2xl">
+                <div class="flex items-center justify-center w-24 h-24 mx-auto mb-6 rounded-full bg-gray-50">
+                    <x-mdi-heart-outline class="w-12 h-12 text-gray-300" />
+                </div>
+                <h2 class="text-2xl font-light text-gray-900">Your wishlist is empty</h2>
+                <p class="mt-2 text-gray-500">Looks like you haven't added any items to your wishlist yet.</p>
+                <div class="flex justify-center mt-8">
+                    <a href="{{ route('products.index') }}"
+                        class="inline-flex items-center px-8 py-3 text-sm font-medium text-white transition-all bg-gray-900 rounded-full shadow-lg hover:bg-gray-800 gap-x-2 shadow-gray-200">
+                        <x-mdi-shopping-outline class="w-5 h-5" />
+                        Start Shopping
+                    </a>
+                </div>
             </div>
         @else
-            <div class="grid gap-6">
-                @foreach ($wishlistItems as $item)
-                    <div
-                        class="flex flex-col sm:flex-row gap-4 p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                        <!-- Product Image -->
-                        <img src="{{ asset('storage/' . $item->product->image) }}" alt="{{ $item->product->name }}"
-                            class="w-full sm:w-24 h-24 object-cover rounded">
+            <div class="space-y-4">
+                @foreach ($wishlistItems as $index => $item)
+                    <div class="relative flex flex-col items-start gap-6 p-6 transition-all duration-300 bg-white border border-gray-100 shadow-sm group rounded-2xl hover:shadow-md md:flex-row md:items-center">
 
-                        <!-- Product Info -->
-                        <div class="flex-1">
-                            <div class="flex justify-between">
-                                <h3 class="font-medium text-gray-900">{{ $item->product->name }}</h3>
-                                <p class="font-semibold">Rp. {{ number_format($item->product->price) }}</p>
+                        <!-- Product Image with zoom effect -->
+                        <div class="relative flex-shrink-0 w-32 h-32 overflow-hidden bg-gray-100 rounded-xl">
+                            <img src="{{ asset('storage/' . $item->product->image) }}"
+                                 alt="{{ $item->product->name }}"
+                                class="object-cover w-full h-full transition-transform duration-500 transform group-hover:scale-105">
+
+                            <!-- Stock Badge on Image (Mobile) -->
+                            <div class="absolute top-2 left-2 md:hidden">
+                                <span class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full gap-x-1
+                                    {{ $item->product->stock > 0 ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700' }}">
+                                    <x-dynamic-component :component="'mdi-' . ($item->product->stock > 0 ? 'check-circle' : 'close-circle')" class="w-3 h-3" />
+                                    {{ $item->product->stock > 0 ? 'In Stock' : 'Out of Stock' }}
+                                </span>
                             </div>
-                            <p class="text-sm text-gray-500">{{ $item->product->category }}</p>
-                            <p class="text-sm mt-2 {{ $item->product->stock > 0 ? 'text-green-600' : 'text-red-600' }}">
-                                {{ $item->product->stock > 0 ? 'In Stock' : 'Out of Stock' }}
-                            </p>
+                        </div>
+
+                        <!-- Product Details -->
+                        <div class="flex-1 text-center md:text-left">
+                            <div class="flex items-center justify-center gap-2 md:justify-start">
+                                <span class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold">{{ $item->product->category }}</span>
+                                @if($item->product->is_new)
+                                    <span class="px-2 py-0.5 text-[10px] font-semibold text-blue-600 uppercase bg-blue-50 rounded-full">New</span>
+                                @endif
+                            </div>
+
+                            <h3 class="mt-1 text-lg font-medium text-gray-800">{{ $item->product->name }}</h3>
+
+                            <div class="flex flex-col items-center mt-2 md:items-start">
+                                <!-- Stock Status (Desktop) -->
+                                <span class="items-center hidden px-2 py-0.5 text-xs rounded-full md:inline-flex gap-x-1
+                                    {{ $item->product->stock > 0 ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700' }}">
+                                    <x-dynamic-component :component="'mdi-' . ($item->product->stock > 0 ? 'check-circle' : 'close-circle')" class="w-4 h-4" />
+                                    {{ $item->product->stock > 0 ? 'In Stock' : 'Out of Stock' }}
+                                </span>
+
+                                <!-- Price -->
+                                <div class="mt-2">
+                                    @if($item->product->old_price)
+                                        <span class="text-sm text-gray-400 line-through">Rp {{ number_format($item->product->old_price, 0, ',', '.') }}</span>
+                                    @endif
+                                    <p class="text-2xl font-light text-gray-900">Rp {{ number_format($item->product->price, 0, ',', '.') }}</p>
+                                </div>
+
+                                <!-- Product Rating (Optional) -->
+                                @if($item->product->rating)
+                                    <div class="flex items-center mt-2 gap-x-1">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            <x-mdi-star :class="$i <= $item->product->rating ? 'text-yellow-400' : 'text-gray-200'" class="w-4 h-4" />
+                                        @endfor
+                                        <span class="ml-1 text-xs text-gray-500">({{ $item->product->reviews_count ?? 0 }})</span>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="flex flex-col sm:flex-row gap-3 self-center">
-                            <form action="{{ route('wishlist.move-to-cart', $item->id) }}" method="POST">
+                        <div class="flex flex-col items-center w-full gap-3 md:w-auto md:flex-row">
+                            <!-- Add to Cart Button -->
+                            <form action="{{ route('wishlist.move-to-cart', $item->id) }}" method="POST" class="w-full md:w-auto">
                                 @csrf
                                 <button type="submit"
-                                    class="flex items-center gap-1 px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                                    class="inline-flex items-center justify-center w-full px-6 py-3 text-sm text-white transition-all bg-gray-900 rounded-lg md:w-auto hover:bg-gray-800 gap-x-2 disabled:opacity-30 disabled:cursor-not-allowed group"
                                     {{ $item->product->stock <= 0 ? 'disabled' : '' }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                    </svg>
+                                    <x-mdi-cart-outline class="w-5 h-5 transition-transform group-hover:-translate-y-0.5" />
                                     <span>Add to Cart</span>
                                 </button>
                             </form>
 
-                            <form action="{{ route('wishlist.remove', $item->id) }}" method="POST">
+                            <!-- Remove Button -->
+                            <form action="{{ route('wishlist.remove', $item->id) }}" method="POST" class="w-full md:w-auto">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="flex items-center gap-1 px-3 py-2 text-red-600 border border-red-600 rounded hover:bg-red-50 transition">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    <span>Remove</span>
+                                    class="inline-flex items-center justify-center w-full px-4 py-3 text-sm text-gray-500 transition-all rounded-lg bg-gray-50 md:w-auto hover:text-red-500 hover:bg-red-50 gap-x-2"
+                                    onclick="return confirm('Remove this item from your wishlist?')">
+                                    <x-mdi-delete-outline class="w-5 h-5" />
+                                    <span class="md:hidden">Remove</span>
                                 </button>
                             </form>
                         </div>
                     </div>
                 @endforeach
+            </div>
+
+            <!-- Bottom Actions -->
+            <div class="flex items-center justify-between mt-8">
+                <a href="{{ route('products.index') }}"
+                   class="inline-flex items-center text-sm text-gray-500 transition hover:text-gray-700 gap-x-2">
+                    <x-mdi-arrow-left class="w-4 h-4" />
+                    Continue Shopping
+                </a>
             </div>
         @endif
     </div>

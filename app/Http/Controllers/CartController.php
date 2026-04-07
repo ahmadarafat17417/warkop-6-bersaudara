@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\Order; // You'll need to create this model
 use Devrabiul\ToastMagic\Facades\ToastMagic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
@@ -19,7 +21,6 @@ class CartController extends Controller
             return $item->product->price * $item->quantity;
         });
 
-        // Assuming 10% tax rate - adjust as needed
         $taxRate = 0.1;
         $tax = $subtotal * $taxRate;
         $total = $subtotal + $tax;
@@ -57,9 +58,7 @@ class CartController extends Controller
     public function increase($id)
     {
         $cartItem = CartItem::where('user_id', Auth::id())->findOrFail($id);
-
         $cartItem->increment('quantity');
-
         return back();
     }
 
@@ -77,13 +76,12 @@ class CartController extends Controller
     public function remove($id)
     {
         $cartItem = CartItem::where('user_id', Auth::id())->findOrFail($id);
-
         $cartItem->delete();
 
         return back()->with('success', 'Item removed from cart');
     }
 
-    public function checkout()
+    public function checkout(Request $request)
     {
         $cartItems = CartItem::with('product')->where('user_id', Auth::id())->get();
 
@@ -92,7 +90,21 @@ class CartController extends Controller
         }
 
         try {
-            DB::transaction(function () use ($cartItems) {
+            $order = DB::transaction(function () use ($cartItems) {
+                // Create order
+                $order = Order::create([
+                    'order_number' => 'ORD-' . strtoupper(Str::random(10)),
+                    'user_id' => Auth::id(),
+                    'subtotal' => $cartItems->sum(fn($item) => $item->product->price * $item->quantity),
+                    'tax' => $cartItems->sum(fn($item) => $item->product->price * $item->quantity) * 0.1,
+                    'total' => $cartItems->sum(fn($item) => $item->product->price * $item->quantity) * 1.1,
+                    'status' => 'processing',
+                    'payment_method' => $request->payment_method ?? 'qris',
+                    'payment_status' => 'paid',
+                    'paid_at' => now(),
+                ]);
+
+                // Create order items and update stock
                 foreach ($cartItems as $item) {
                     $product = $item->product;
 
@@ -100,16 +112,41 @@ class CartController extends Controller
                         throw new \Exception("Insufficient stock for {$product->name}");
                     }
 
+                    // Create order item
+                    $order->items()->create([
+                        'product_id' => $product->id,
+                        'product_name' => $product->name,
+                        'price' => $product->price,
+                        'quantity' => $item->quantity,
+                        'subtotal' => $product->price * $item->quantity,
+                    ]);
+
+                    // Decrease stock
                     $product->decrement('stock', $item->quantity);
                 }
 
+                // Clear cart
                 CartItem::where('user_id', Auth::id())->delete();
+
+                return $order;
             });
 
-            ToastMagic::success('Checkout berhasil');
-            return to_route('cart.index')->with('success', 'Order placed successfully!');
+            ToastMagic::success('Pembayaran berhasil!');
+            return redirect()->route('order.receipt', $order->order_number);
+
         } catch (\Exception $e) {
+            ToastMagic::error('Checkout gagal: ' . $e->getMessage());
             return back()->with('error', $e->getMessage());
         }
+    }
+
+    public function receipt($orderNumber)
+    {
+        $order = Order::with('items.product')
+            ->where('order_number', $orderNumber)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        return view('pages.order.receipt', compact('order'));
     }
 }

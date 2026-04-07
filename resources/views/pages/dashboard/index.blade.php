@@ -9,7 +9,7 @@
                 <div class="flex items-center justify-between">
                     <h1 class="text-2xl font-bold text-gray-900">Product Management</h1>
                     <a href="{{ route('products.create') }}"
-                        class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-orange-600 border border-transparent rounded-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+                        class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out border border-transparent rounded-md bg-zinc-600 hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2">
                         Add Product
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -84,7 +84,7 @@
                                         <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                             <div class="flex justify-end space-x-3">
                                                 <a href="{{ route('products.edit', $product->id) }}"
-                                                    class="text-orange-600 hover:text-orange-900" title="Edit Product">
+                                                    class="text-zinc-600 hover:text-zinc-900" title="Edit Product">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
                                                         viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -98,7 +98,7 @@
                                                     class="inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="text-red-600 cursor-pointer hover:text-red-900">
+                                                    <button type="submit" class="cursor-pointer text-zinc-600 hover:text-red-900">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -139,7 +139,7 @@
                                             </svg>
                                         </a>
                                         <a href="#" aria-current="page"
-                                            class="relative z-10 inline-flex items-center px-4 py-2 text-sm font-medium text-orange-600 border border-orange-500 bg-orange-50">
+                                            class="relative z-10 inline-flex items-center px-4 py-2 text-sm font-medium border text-zinc-600 border-zinc-500 bg-zinc-50">
                                             1
                                         </a>
                                         <a href="#"

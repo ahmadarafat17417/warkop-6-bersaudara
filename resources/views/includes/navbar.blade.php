@@ -1,192 +1,128 @@
-<nav class="bg-[#B90B0B]">
-    <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
-        <div class="flex justify-between items-center h-14 sm:h-16 lg:h-18 gap-2 sm:gap-4">
-            
-            <!-- LEFT SECTION: Logo & Welcome Text -->
-            <div class="flex items-center gap-2 sm:gap-3 lg:gap-4 flex-shrink-0">
-                <!-- Logo -->
-                <img src="{{ asset('img/logo/logowarmad.png') }}" 
-                     class="h-10 sm:h-12 lg:h-14 xl:h-16 object-contain" 
+<nav class="sticky top-0 z-50 border-b bg-zinc-950 border-white/5 backdrop-blur-md">
+    <div class="px-3 mx-auto max-w-7xl sm:px-4 lg:px-8">
+        <div class="flex items-center justify-between gap-2 h-14 sm:h-16 lg:h-18 sm:gap-4">
+
+            <div class="flex items-center gap-2 shrink-0 sm:gap-3 lg:gap-4">
+                <img src="{{ asset('img/logo/logo.png') }}"
+                     class="object-contain h-10 sm:h-12 lg:h-14 xl:h-16 brightness-110 contrast-125"
                      alt="Logo Warmad">
 
-                <!-- Welcome Text - Responsive -->
                 @auth
-                    <!-- Mobile & Tablet - Short version -->
-                    <h1 class="hidden sm:block xl:hidden text-white text-xs sm:text-sm whitespace-nowrap">
-                        Halo, <span class="font-semibold">{{ Str::limit(Auth::user()->name, 10) }}</span>
-                    </h1>
-                    
-                    <!-- Desktop & 4K - Full version -->
-                    <h1 class="hidden xl:block text-white text-sm lg:text-base whitespace-nowrap">
-                        Selamat datang Kembali!, 
-                        <span class="font-semibold">{{ Auth::user()->name }}</span>
-                    </h1>
+                    <div class="flex-col hidden sm:flex">
+                        <h1 class="text-[10px] text-zinc-500 uppercase tracking-widest font-medium">Welcome back</h1>
+                        <h1 class="text-xs font-semibold text-white xl:hidden sm:text-sm whitespace-nowrap">
+                            {{ Str::limit(Auth::user()->name, 10) }}
+                        </h1>
+                        <h1 class="hidden text-sm font-semibold text-white xl:block lg:text-base whitespace-nowrap">
+                            {{ Auth::user()->name }}
+                        </h1>
+                    </div>
                 @endauth
             </div>
 
-            <!-- CENTER SECTION: Search Bar - Hidden on mobile -->
-            <div class="hidden md:flex flex-1 justify-center max-w-md lg:max-w-lg xl:max-w-xl">
+            <div class="justify-center flex-1 hidden max-w-xs md:flex">
                 <form action="" method="POST" class="w-full font-[Poppins]">
-                    <input type="text" 
-                           placeholder="Search..."
-                           class="w-full px-3 lg:px-4 py-1.5 lg:py-2 text-sm lg:text-base bg-white text-black rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-sm" />
+                    <div class="relative">
+                        <input type="text"
+                               placeholder="Search menu..."
+                               class="w-full px-4 py-2 pl-10 text-sm text-white border shadow-inner lg:text-base bg-zinc-900 rounded-xl border-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-600 focus:border-transparent placeholder:text-zinc-600" />
+                        <x-mdi-magnify class="absolute w-4 h-4 -translate-y-1/2 left-3 top-1/2 text-zinc-500" />
+                    </div>
                 </form>
             </div>
 
-            <!-- RIGHT SECTION: Icons & Nav Links -->
-            <div class="flex items-center gap-2 sm:gap-3 lg:gap-4">
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center gap-2 lg:gap-4">
-                    
-                    <!-- Notification Button -->
-                    <button class="text-white focus:outline-none hover:text-orange-200 transition p-1">
-                        <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15 17h5l-1.405-1.405C18.21 14.79 18 14.4 18 14V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3c0 .4-.21.79-.595 1.595L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                            </path>
-                        </svg>
-                    </button>
+            <div class="flex items-center gap-4 sm:gap-3 lg:gap-4">
+                <div class="items-center hidden gap-2 md:flex lg:gap-6">
 
-                    <!-- Cart Button -->
-                    <a href="{{ route('cart.index') }}" 
-                       class="text-white focus:outline-none hover:text-orange-200 transition p-1">
-                        <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13L17 13M7 13h10M9 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z">
-                            </path>
-                        </svg>
-                    </a>
+                    <div class="flex items-center gap-2 pr-4 border-r border-zinc-800">
+                        <button class="p-2 transition rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-900">
+                            <x-mdi-bell class="w-5 h-5" />
+                        </button>
+                        <a href="{{ route('cart.index') }}"
+                           class="p-2 transition rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-900">
+                            <x-mdi-cart class="w-5 h-5" />
+                        </a>
+                    </div>
 
-                    <!-- Nav Links -->
-                    <div class="flex items-center gap-4 lg:gap-6 xl:gap-9 font-[Poppins] text-sm lg:text-base">
-                        <a href="{{ route('main.index') }}" 
-                           class="text-white hover:text-[#FB9935] transition whitespace-nowrap">
-                            Home
-                        </a>
-                        <a href="#" 
-                           class="text-white hover:text-[#FB9935] transition whitespace-nowrap">
-                            Shop
-                        </a>
-                        <a href="{{ route('wishlist.index') }}" 
-                           class="text-white hover:text-[#FB9935] transition whitespace-nowrap">
-                            Wishlist
-                        </a>
-
-                        <form method="POST" action="{{ route('auth.logout') }}">
-                            @csrf
-                            <button class="text-white hover:text-[#FB9935] bg-[#8C0909] px-2 lg:px-3 py-1 rounded-2xl text-sm lg:text-base transition hover:bg-[#6d0707] whitespace-nowrap">
-                                Logout
-                            </button>
-                        </form>
+                    <div class="flex items-center gap-5 font-[Poppins] text-sm lg:text-[15px]">
+                        <a href="{{ route('main.index') }}" class="font-medium transition text-zinc-400 hover:text-white whitespace-nowrap">Home</a>
+                        <a href="#" class="font-medium transition text-zinc-400 hover:text-white whitespace-nowrap">Shop</a>
+                        <a href="{{ route('wishlist.index') }}" class="font-medium transition text-zinc-400 hover:text-white whitespace-nowrap">Wishlist</a>
+                        <a href="{{ route('main.about') }}" class="font-medium transition text-zinc-400 hover:text-white whitespace-nowrap">About</a>
 
                         @auth
-                            @if (auth()->user()->role == 'admin')
-                                <a href="{{ route('products.index') }}"
-                                   class="text-white hover:text-orange-200 px-2 lg:px-3 py-1 rounded-2xl bg-green-700 text-sm lg:text-base transition hover:bg-green-800 whitespace-nowrap">
-                                    Dashboard
-                                </a>
-                            @endif
+                            <div class="flex items-center gap-2 ml-2">
+                                @if (auth()->user()->role == 'admin')
+                                    <a href="{{ route('products.index') }}"
+                                       class="flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-white transition bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 rounded-lg whitespace-nowrap">
+                                        <x-mdi-view-dashboard class="w-4 h-4" />
+                                        Admin
+                                    </a>
+                                @endif
+
+                                <form method="POST" action="{{ route('auth.logout') }}">
+                                    @csrf
+                                    <button class="text-black bg-white px-4 py-1.5 rounded-lg text-sm font-bold transition hover:bg-zinc-200 whitespace-nowrap flex items-center gap-1 shadow-md">
+                                        <x-mdi-logout class="w-4 h-4" />
+                                        Logout
+                                    </button>
+                                </form>
+                            </div>
                         @endauth
                     </div>
                 </div>
 
-                <!-- Mobile Icons & Menu Button -->
-                <div class="md:hidden flex items-center gap-3">
-                    
-                    <!-- Notification Button Mobile -->
-                    <button class="text-white focus:outline-none">
-                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15 17h5l-1.405-1.405C18.21 14.79 18 14.4 18 14V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3c0 .4-.21.79-.595 1.595L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                            </path>
-                        </svg>
+                <div class="flex items-center gap-3 md:hidden">
+                    <button class="text-zinc-400 focus:outline-none">
+                        <x-mdi-bell class="w-5 h-5" />
                     </button>
-
-                    <!-- Cart Button Mobile -->
-                    <a href="{{ route('cart.index') }}" class="text-white focus:outline-none">
-                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 7h13L17 13M7 13h10M9 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z">
-                            </path>
-                        </svg>
+                    <a href="{{ route('cart.index') }}" class="text-zinc-400 focus:outline-none">
+                        <x-mdi-cart class="w-5 h-5" />
                     </a>
-
-                    <!-- Mobile Menu Toggle -->
-                    <button id="menu-btn" class="text-white focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
+                    <button id="menu-btn" class="p-1 text-white border rounded-md bg-zinc-900 focus:outline-none border-zinc-800">
+                        <x-mdi-menu class="w-6 h-6" />
                     </button>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <!-- Mobile Dropdown Menu -->
-    <div id="mobile-menu" class="md:hidden hidden bg-[#8C0909] font-[Poppins]">
-        <div class="px-3 sm:px-4 py-3 sm:py-4 space-y-3">
-            
-            <!-- Search Bar Mobile - Di paling atas -->
-            <div class="pb-3 border-b border-orange-300/30">
-                <input type="text" 
-                       placeholder="Search..."
-                       class="w-full px-3 py-2 text-sm bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 shadow-sm" />
+    <div id="mobile-menu" class="md:hidden hidden bg-zinc-950 border-t border-zinc-900 font-[Poppins]">
+        <div class="px-4 py-6 space-y-4">
+            <div class="relative">
+                <input type="text" placeholder="Search menu..."
+                       class="w-full px-4 py-2 pl-10 text-sm text-white border rounded-lg bg-zinc-900 border-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-600" />
+                <x-mdi-magnify class="absolute w-4 h-4 -translate-y-1/2 left-3 top-1/2 text-zinc-500" />
             </div>
-            
-            <!-- Welcome Text Mobile -->
-            @auth
-                <div class="text-white text-sm py-2 border-b border-orange-300/30">
-                    Halo, <span class="font-semibold">{{ Auth::user()->name }}</span>
-                </div>
-            @endauth
 
-            <!-- Navigation Links -->
-            <a href="{{ route('main.index') }}" 
-               class="block py-2.5 text-orange-100 hover:text-white hover:bg-[#B90B0B] px-3 rounded transition">
-                Home
-            </a>
-            <a href="#" 
-               class="block py-2.5 text-orange-100 hover:text-white hover:bg-[#B90B0B] px-3 rounded transition">
-                Shop
-            </a>
-            <a href="{{ route('wishlist.index') }}" 
-               class="block py-2.5 text-orange-100 hover:text-white hover:bg-[#B90B0B] px-3 rounded transition">
-                Wishlist
-            </a>
+            <div class="space-y-1">
+                <a href="{{ route('main.index') }}" class="flex items-center gap-3 px-3 py-3 transition text-zinc-400 hover:text-white rounded-xl hover:bg-zinc-900">
+                    <x-mdi-home class="w-5 h-5" /> Home
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-3 transition text-zinc-400 hover:text-white rounded-xl hover:bg-zinc-900">
+                    <x-mdi-storefront class="w-5 h-5" /> Shop
+                </a>
+                <a href="{{ route('wishlist.index') }}" class="flex items-center gap-3 px-3 py-3 transition text-zinc-400 hover:text-white rounded-xl hover:bg-zinc-900">
+                    <x-mdi-heart class="w-5 h-5" /> Wishlist
+                </a>
+            </div>
 
-            <!-- Logout Button -->
-            <form method="POST" action="{{ route('auth.logout') }}" class="w-full">
-                @csrf
-                <button class="w-full block py-2.5 text-white bg-red-800 hover:bg-red-900 text-center rounded transition font-medium">
-                    Logout
-                </button>
-            </form>
-
-            <!-- Dashboard Button (Admin) -->
-            @auth
-                @if (auth()->user()->role == 'admin')
-                    <a href="{{ route('products.index') }}" 
-                       class="w-full block py-2.5 text-white bg-green-700 hover:bg-green-800 text-center rounded transition font-medium">
-                        Dashboard
-                    </a>
-                @endif
-            @endauth
+            <div class="pt-4 space-y-3 border-t border-zinc-900">
+                @auth
+                    @if (auth()->user()->role == 'admin')
+                        <a href="{{ route('products.index') }}"
+                           class="flex items-center justify-center w-full gap-2 py-3 font-medium text-white transition border bg-zinc-800 border-zinc-700 rounded-xl">
+                            <x-mdi-view-dashboard class="w-5 h-5" /> Dashboard Admin
+                        </a>
+                    @endif
+                    <form method="POST" action="{{ route('auth.logout') }}" class="w-full">
+                        @csrf
+                        <button class="flex items-center justify-center w-full gap-2 py-3 font-bold text-black transition bg-white shadow-lg hover:bg-zinc-200 rounded-xl">
+                            <x-mdi-logout class="w-5 h-5" /> Logout
+                        </button>
+                    </form>
+                @endauth
+            </div>
         </div>
     </div>
 </nav>
-
-<script>
-// Mobile menu toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
-        });
-    }
-});
-</script>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 // Routes for Redirecting to Main Pages
 Route::get('/', [MainController::class, 'welcome'])->name('main.welcome');
 Route::get('/home', [MainController::class, 'index'])->name('main.index');
+Route::get('/about', [MainController::class, 'about'])->name('main.about');
 
 // Routes For Authentication
 Route::get('/register', [AuthController::class, 'showRegister'])->name('show.register');
@@ -33,13 +34,14 @@ Route::prefix('dashboard')->controller(ProductController::class)->group(function
     Route::delete('/{product}', 'destroy')->name('products.destroy');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
     Route::post('/cart/increase/{id}', [CartController::class, 'increase'])->name('cart.increase');
     Route::post('/cart/decrease/{id}', [CartController::class, 'decrease'])->name('cart.decrease');
     Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::get('/order/receipt/{orderNumber}', [CartController::class, 'receipt'])->name('order.receipt');
 });
 
 Route::middleware('auth')->group(function () {

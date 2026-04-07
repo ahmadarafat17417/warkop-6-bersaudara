@@ -16,8 +16,12 @@ class MainController extends Controller
 
     public function index() {
         $products = Product::all();
-        
-        return view('pages.main.index', compact('products'));
 
+        return view('pages.main.index', compact('products'));
+    }
+
+    public function about()
+    {
+        return view('pages.main.about');
     }
 }

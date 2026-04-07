@@ -30,64 +30,238 @@
 
 @section('page_content')
 
-    {{-- BANNER --}}
-    <div class="relative w-full h-[300px] sm:h-[350px] lg:h-[400px] xl:h-[450px] 2xl:h-[500px] font-[Poppins] banner-container">
-        {{-- Background image with brightness overlay --}}
-        <div class="absolute w-full h-full z-[1] banner-background">
-            <img class="w-full h-full object-fit" src="img/patterns/banner-warmad.png" alt="Banner Background">
+    {{-- HERO BANNER - Warkop 6 Bersaudara Reborn --}}
+    <div class="relative w-full h-[85vh] min-h-150 flex items-center overflow-hidden bg-black font-[Poppins]">
+        {{-- Background Image with Dark Overlay --}}
+        <div class="absolute inset-0 z-0">
+            <img class="object-cover w-full h-full opacity-40 grayscale" src="img/about/banner.jpeg" alt="Banner Background">
+            {{-- Overlay Gradasi untuk memastikan teks terbaca --}}
+            <div class="absolute inset-0 bg-linear-to-r from-black via-black/60 to-transparent"></div>
         </div>
 
-        {{-- Banner content --}}
-        <div class="relative z-10 flex flex-col justify-center h-full px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
+        {{-- Banner Content --}}
+        <div class="relative z-10 w-full px-6 mx-auto max-w-7xl">
+            <div class="max-w-4xl text-white">
+                <h1 class="mb-8 font-light tracking-tight text-white">
+                    <span
+                        class="block mb-4 text-xl font-normal sm:text-2xl text-zinc-500 uppercase tracking-[0.3em] animate-fade-in">
+                        Selamat Datang di
+                    </span>
 
-            {{-- Content grid - Responsive columns --}}
-            <div class="grid items-center grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                    <span class="block text-5xl font-black leading-none tracking-tighter uppercase sm:text-7xl md:text-8xl">
+                        Warkop 6 Bersaudara
+                    </span>
 
-                {{-- HOOK - Text content --}}
-                {{-- <div class="text-white text-left lg:text-left banner-content">
-                    <h2 class="mb-2 text-xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-semibold leading-tight">
-                        Warung Ahmad
-                    </h2>
-                    <p class="text-sm sm:text-base lg:text-lg xl:text-xl opacity-90">
-                        Langsung aja, cari Kebutuhan Sembako-mu di Warung Ahmad!
+                    {{-- Efek Reborn dengan Text Stroke --}}
+                    <p class="mt-2 font-black tracking-tighter uppercase text-7xl sm:text-8xl md:text-9xl opacity-90"
+                        style="-webkit-text-stroke: 2px white; color: transparent;">
+                        Reborn
                     </p>
-                </div> --}}
+                </h1>
 
+                <p class="max-w-xl mb-10 text-lg font-light tracking-wide text-gray-400 sm:text-xl opacity-80">
+                    Menyajikan cita rasa autentik dengan suasana baru yang lebih segar. Temukan kenyamanan nongkrong yang
+                    tak terlupakan.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#product-categories"
+                        class="group relative inline-flex items-center gap-3 px-10 py-4 text-sm font-bold tracking-[0.2em] text-black uppercase transition-all bg-white hover:bg-zinc-200">
+                        Explore Menu
+                        <x-mdi-arrow-right class="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {{-- Scroll Indicator --}}
+        <div class="absolute z-10 -translate-x-1/2 bottom-10 left-1/2 animate-bounce">
+            <x-mdi-chevron-double-down class="w-8 h-8 text-white/30" />
         </div>
     </div>
 
-                {{-- Button - Responsive positioning --}}
-    <div class="w-full flex justify-center -mt-6 sm:-mt-8 lg:-mt-10 relative z-20 banner-content">
-        <a href="#product-categories"
-            class="inline-flex flex-col items-center px-8 py-2.5 text-sm sm:text-base text-white bg-red-700 rounded-full hover:bg-red-800 transition shadow-lg">
-            Belanja Sekarang
-            <svg class="w-5 h-5 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 1v12m0 0 4-4m-4 4L1 9"/>
-            </svg>
-        </a>
+
+    {{-- GALLERY & MENU SECTION --}}
+    <section class="py-20 bg-white font-[Poppins]">
+        <div class="px-6 mx-auto max-w-7xl">
+            <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
+
+                {{-- Left Side: Text & Context --}}
+                <div class="flex flex-col justify-center order-2 lg:order-1">
+                    <span class="text-[10px] font-bold tracking-[0.5em] text-gray-400 uppercase mb-4 block">Visual Experience</span>
+                    <h2 class="mb-6 text-4xl font-bold tracking-tighter text-black uppercase sm:text-5xl lg:text-6xl">
+                        Poster & <br> <span class="italic font-light text-zinc-400">Our Signature</span> Menu
+                    </h2>
+                    <p class="max-w-md mb-8 text-lg font-light leading-relaxed text-gray-500">
+                        Dari biji kopi pilihan hingga hidangan autentik, lihat apa yang membuat kami berbeda dalam setiap sajian.
+                    </p>
+                    <div class="flex gap-6">
+                        <div class="flex flex-col">
+                            <span class="text-2xl font-bold text-black">100%</span>
+                            <span class="text-xs tracking-widest text-gray-400 uppercase">Authentic</span>
+                        </div>
+                        <div class="w-[1px] h-12 bg-gray-200"></div>
+                        <div class="flex flex-col">
+                            <span class="text-2xl font-bold text-black">Reborn</span>
+                            <span class="text-xs tracking-widest text-gray-400 uppercase">Concept</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative grid order-1 grid-cols-2 gap-4 lg:order-2">
+    {{-- Image 1: Poster --}}
+    <div class="relative overflow-hidden border border-zinc-800 rounded-2xl bg-zinc-900 group aspect-[3/4]">
+        <img src="{{ asset('img/about/poster.jpeg') }}"
+             alt="Warkop Poster"
+             class="object-cover w-full h-full transition-all duration-1000 ease-in-out group-hover:scale-110 group-hover:rotate-1">
+
+        <div class="absolute inset-0 flex items-end p-6 transition-all duration-500 opacity-0 bg-linear-to-t from-black/80 via-transparent to-transparent group-hover:opacity-100">
+            <div class="transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
+                <span class="text-white text-[10px] font-black tracking-[0.3em] uppercase border-b border-white/30 pb-1">
+                    The Poster
+                </span>
+            </div>
+        </div>
     </div>
 
-    {{-- BEST ITEM --}}
-    <section class="mt-5 sm:mt-6 lg:mt-8 xl:mt-10 px-4 sm:px-6 lg:px-8 font-[Poppins] best-item-section">
-        <div class="mx-auto max-w-7xl">
-            <h2 class="mb-3 sm:mb-4 text-lg sm:text-xl lg:text-2xl xl:text-3xl font-semibold best-item-title">
-                Best Item Products
-            </h2>
+    {{-- Image 2: Menu --}}
+    <div class="relative mt-12 overflow-hidden border border-zinc-800 rounded-2xl bg-zinc-900 group aspect-[3/4]">
+        <img src="{{ asset('img/about/menu.jpeg') }}"
+             alt="Warkop Menu"
+             class="object-cover w-full h-full transition-all duration-1000 ease-in-out group-hover:scale-110 group-hover:-rotate-1">
 
-            <div class="flex gap-3 sm:gap-4 lg:gap-5 xl:gap-6 pb-4 overflow-x-auto scrollbar-hide">
-                @foreach ($products->take(8) as $product)
-                    <div class="min-w-[140px] sm:min-w-[160px] md:min-w-[180px] lg:min-w-[200px] xl:min-w-[220px] 2xl:min-w-[240px] bg-white rounded-xl shadow hover:shadow-lg transition best-item-card flex-shrink-0">
-                        <img
-                            src="{{ asset('storage/' . $product->image) }}"
-                            class="w-full h-[120px] sm:h-[140px] lg:h-[160px] xl:h-[180px] object-contain p-2 sm:p-3"
-                            alt="{{ $product->name }}"
-                        >
-                        <div class="px-2 sm:px-3 pb-2 sm:pb-3">
-                            <p class="text-xs sm:text-sm font-semibold truncate">
-                                {{ $product->name }}
+        <div class="absolute inset-0 flex items-end p-6 transition-all duration-500 opacity-0 bg-linear-to-t from-black/80 via-transparent to-transparent group-hover:opacity-100">
+            <div class="transition-transform duration-500 translate-y-4 group-hover:translate-y-0">
+                <span class="text-white text-[10px] font-black tracking-[0.3em] uppercase border-b border-white/30 pb-1">
+                    The Menu
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+    </section>
+
+    {{-- OUR CATEGORY - Grid Elegant --}}
+    <section class="py-20 bg-[#0a0a0a] text-white font-[Poppins]">
+        <div class="px-6 mx-auto max-w-7xl">
+            <div class="max-w-3xl mb-16">
+                <h2 class="mb-4 text-4xl font-bold tracking-tight uppercase">Kategori Pilihan</h2>
+                <div class="w-20 h-1 mb-6 bg-white"></div>
+                <p class="text-lg font-light text-gray-400">
+                    Kurasi produk terbaik untuk memenuhi gaya hidup dan kebutuhan esensial Anda.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+                @php
+                    $categories = [
+                        [
+                            'id' => 'Sembako',
+                            'title' => 'Makanan Gurih',
+                            'desc' => 'Daging sapi pilihan',
+                            'img' => 'bakso.png',
+                        ],
+                        [
+                            'id' => 'Makanan',
+                            'title' => 'Desserts',
+                            'desc' => 'Manis & berkelas',
+                            'img' => 'roti-bakar.png',
+                        ],
+                        ['id' => 'Elektronik', 'title' => 'Minuman', 'desc' => 'Segar & murni', 'img' => 'es-teh.png'],
+                        ['id' => 'Rokok', 'title' => 'Rokok', 'desc' => 'Koleksi lengkap', 'img' => 'marlong.png'],
+                    ];
+                @endphp
+
+                @foreach ($categories as $cat)
+                    <a href="#category-{{ $cat['id'] }}"
+                        class="relative h-64 overflow-hidden border group border-white/10">
+                        <div
+                            class="absolute inset-0 z-0 transition-transform duration-700 bg-white/5 group-hover:scale-110">
+                            <img src="{{ asset('img/categories/' . $cat['img']) }}"
+                                class="object-contain w-full h-full p-10 transition-all opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0"
+                                alt="{{ $cat['title'] }}">
+                        </div>
+                        <div
+                            class="absolute inset-0 z-10 flex flex-col justify-end p-6 bg-linear-to-t from-black to-transparent">
+                            <h3 class="text-xl font-bold tracking-wider uppercase">{{ $cat['title'] }}</h3>
+                            <p
+                                class="mt-1 text-xs tracking-widest text-gray-400 uppercase transition-opacity opacity-0 group-hover:opacity-100">
+                                View Collection →
                             </p>
-                            <p class="text-xs text-gray-500">
-                                Rp {{ number_format($product->price) }}
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+
+    {{-- BEST ITEM - Compact & Elegant Slider --}}
+    <section class="py-12 bg-white font-[Poppins]">
+        <div class="px-6 mx-auto max-w-7xl">
+            {{-- Header yang lebih slim --}}
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-3">
+                    <h2 class="text-2xl font-bold tracking-tighter text-black uppercase">Featured</h2>
+                    <span class="w-8 h-px bg-black/20"></span>
+                    <p class="hidden text-xs font-medium tracking-widest text-gray-400 uppercase sm:block">Best Sellers</p>
+                </div>
+                <div class="flex items-center gap-2 cursor-default group">
+                    <span class="text-[10px] font-bold tracking-[0.2em] text-gray-400 uppercase">Slide</span>
+                    <svg class="w-4 h-4 text-gray-400 transition-transform group-hover:translate-x-1" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+
+            {{-- Slider Container --}}
+            <div class="flex gap-4 pb-6 overflow-x-auto scrollbar-hide">
+                @foreach ($products->take(8) as $product)
+                    <div class="min-w-[160px] sm:min-w-[220px] group">
+                        {{-- Image: Square aspect ratio untuk menghemat ruang vertikal --}}
+                        <div
+                            class="relative mb-4 overflow-hidden bg-[#F9F9F9] aspect-square flex items-center justify-center p-4 rounded-sm transition-all duration-300 group-hover:bg-[#F2F2F2]">
+
+                            {{-- Image (Full Color from start) --}}
+                            <img src="{{ asset('storage/' . $product->image) }}"
+                                class="object-contain w-full h-full transition-transform duration-500 group-hover:scale-105"
+                                alt="{{ $product->name }}">
+
+                            {{-- Quick Action Overlay --}}
+                            <div
+                                class="absolute inset-0 flex items-center justify-center gap-2 transition-opacity opacity-0 bg-white/40 backdrop-blur-[2px] group-hover:opacity-100">
+                                <button
+                                    class="p-2 transition-all bg-white border border-gray-100 rounded-full shadow-sm hover:bg-black hover:text-white"
+                                    title="Add to Wishlist">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                        </path>
+                                    </svg>
+                                </button>
+                                <button
+                                    class="p-2 transition-all bg-white border border-gray-100 rounded-full shadow-sm hover:bg-black hover:text-white"
+                                    title="Add to Cart">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        {{-- Text Content --}}
+                        <div class="px-1">
+                            <h3 class="text-[11px] font-bold tracking-widest text-black uppercase truncate mb-1">
+                                {{ $product->name }}
+                            </h3>
+                            <p class="text-xs font-medium text-gray-500">
+                                Rp {{ number_format($product->price, 0, ',', '.') }}
                             </p>
                         </div>
                     </div>
@@ -96,277 +270,133 @@
         </div>
     </section>
 
+    {{-- PRODUCT LISTINGS - Modern Elegant Grid (Functional Fixed) --}}
+    <div id="product-categories" class="py-20 bg-white font-[Poppins]">
+        @php $groupedProducts = $products->groupBy('category'); @endphp
 
-    {{-- OUR CATEGORY --}}
-    <section class="mt-6 sm:mt-8 lg:mt-10 xl:mt-12 px-4 sm:px-6 lg:px-8 font-[Poppins] category-section">
-        <div class="mx-auto max-w-7xl">
-            <div class="category-header">
-                <h2 class="mb-2 text-lg sm:text-xl lg:text-2xl xl:text-3xl font-semibold">
-                    Our Category
-                </h2>
+        @foreach ($groupedProducts as $categoryName => $categoryProducts)
+            <section id="category-{{ $categoryName }}" class="mb-24 last:mb-10 scroll-mt-24">
+                <div class="px-6 mx-auto max-w-7xl">
 
-                <p class="mb-6 sm:mb-8 text-xs sm:text-sm lg:text-base text-gray-500">
-                    Kami menyediakan produk-produk terbaik di Prumpung, membantu Anda memenuhi kebutuhan sehari-hari dengan mudah.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6 xl:gap-8">
-                {{-- CARD SEMBAKO --}}
-                <a href="#category-Sembako" class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 lg:p-5 xl:p-6 transition bg-white rounded-xl hover:bg-gray-100 hover:shadow-md cursor-pointer category-card">
-                    <img src="{{ asset('img/categories/iconsembako.png') }}" class="object-contain w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 flex-shrink-0">
-                    <div class="flex-1 min-w-0">
-                        <h3 class="text-sm sm:text-base lg:text-lg xl:text-xl font-semibold">
-                            Sembako
-                        </h3>
-                        <p class="text-xs sm:text-sm lg:text-base leading-snug text-gray-500">
-                            Beras, minyak, gula, dan kebutuhan pokok harian
-                        </p>
+                    {{-- Category Header --}}
+                    <div class="flex items-end justify-between pb-8 mb-10 border-b border-gray-100">
+                        <div>
+                            <span class="text-[10px] font-bold tracking-[0.4em] text-gray-400 uppercase block mb-2">Explore
+                                Our Collection</span>
+                            <h2 class="text-3xl font-bold tracking-tight text-black uppercase lg:text-4xl">
+                                {{ $categoryName }}
+                            </h2>
+                        </div>
+                        <div class="hidden text-right sm:block">
+                            <span class="text-sm italic font-medium text-gray-400">{{ $categoryProducts->count() }} Items
+                                Available</span>
+                        </div>
                     </div>
-                </a>
 
-                {{-- CARD MAKANAN & MINUMAN --}}
-                <a href="#category-Makanan" class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 lg:p-5 xl:p-6 transition bg-white rounded-xl hover:bg-gray-100 hover:shadow-md cursor-pointer category-card">
-                    <img src="{{ asset('img/categories/makanan&minuman.png') }}" class="object-contain w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 flex-shrink-0">
-                    <div class="flex-1 min-w-0">
-                        <h3 class="text-sm sm:text-base lg:text-lg xl:text-xl font-semibold">Makanan & Minuman</h3>
-                        <p class="text-xs sm:text-sm lg:text-base text-gray-500">
-                            Makanan ringan dan minuman dingin hangat favorit
-                        </p>
+                    {{-- Product Grid --}}
+                    <div class="grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-8">
+                        @foreach ($categoryProducts as $product)
+                            <div class="relative flex flex-col group">
+                                {{-- Product Image Container --}}
+                                <div
+                                    class="relative overflow-hidden bg-[#F9F9F9] aspect-square transition-all duration-500 group-hover:shadow-xl">
+                                    @if ($loop->first)
+                                        <span
+                                            class="absolute top-3 left-3 z-10 bg-black text-white text-[9px] font-bold uppercase px-2 py-1 tracking-widest">New</span>
+                                    @endif
+
+                                    {{-- Image --}}
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
+                                        class="object-contain w-full h-full p-6 transition-transform duration-700 group-hover:scale-110">
+
+                                    {{-- FUNCTIONAL ACTION BUTTONS --}}
+                                    {{-- FUNCTIONAL ACTION BUTTONS --}}
+                                    <div
+                                        class="absolute flex flex-col gap-2 transition-all duration-300 translate-x-12 opacity-0 top-3 right-3 group-hover:translate-x-0 group-hover:opacity-100">
+
+                                        {{-- Wishlist Form --}}
+                                        <form action="{{ route('wishlist.add', $product) }}" method="POST">
+                                            @csrf
+                                            @php
+                                                // Cek apakah produk ada di wishlist user yang sedang login
+                                                $isWishlisted =
+                                                    auth()->check() &&
+                                                    auth()->user()->wishlistItems->contains('product_id', $product->id);
+                                            @endphp
+                                            <button type="submit"
+                                                class="flex items-center justify-center p-2 transition-colors border border-gray-100 rounded-full shadow-sm
+            {{ $isWishlisted ? 'bg-black text-white' : 'bg-white text-black hover:bg-black hover:text-white' }}"
+                                                title="{{ $isWishlisted ? 'In Wishlist' : 'Add to Wishlist' }}">
+                                                @if ($isWishlisted)
+                                                    <x-mdi-heart class="w-5 h-5" /> {{-- Ikon solid jika sudah ada --}}
+                                                @else
+                                                    <x-mdi-heart-outline class="w-5 h-5" />
+                                                @endif
+                                            </button>
+                                        </form>
+
+                                        {{-- Cart Form --}}
+                                        <form action="{{ route('cart.add', $product) }}" method="POST">
+                                            @csrf
+                                            @php
+                                                // Cek apakah produk ada di keranjang user yang sedang login
+                                                $isInCart =
+                                                    auth()->check() &&
+                                                    auth()->user()->cartItems->contains('product_id', $product->id);
+                                            @endphp
+                                            <button type="submit"
+                                                class="flex items-center justify-center p-2 transition-colors border border-gray-100 rounded-full shadow-sm
+            {{ $isInCart ? 'bg-black text-white' : 'bg-white text-black hover:bg-black hover:text-white' }}"
+                                                title="{{ $isInCart ? 'In Cart' : 'Add to Cart' }}">
+                                                <x-mdi-cart-outline class="w-5 h-5" />
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                    {{-- View Details Link - Mengarah ke route edit sesuai web.php --}}
+                                    <div
+                                        class="absolute inset-x-0 bottom-0 p-3 transition-transform duration-300 translate-y-full group-hover:translate-y-0 bg-linear-to-t from-white/90 to-transparent">
+                                        <a
+                                            class="block w-full py-2 bg-black text-white text-center text-[10px] font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
+                                            View Details
+                                        </a>
+                                    </div>
+                                </div>
+
+                                {{-- Product Info --}}
+                                <div class="mt-5 text-center sm:text-left">
+                                    <h3 class="text-xs font-bold tracking-widest text-gray-900 uppercase truncate">
+                                        {{ $product->name }}
+                                    </h3>
+                                    <div class="flex items-center justify-center gap-2 mt-2 sm:justify-start">
+                                        <span class="text-sm font-semibold text-black">
+                                            Rp {{ number_format($product->price, 0, ',', '.') }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                </a>
-
-                {{-- CARD ELEKTRONIK --}}
-                <a href="#category-Elektronik" class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 lg:p-5 xl:p-6 transition bg-white rounded-xl hover:bg-gray-100 hover:shadow-md cursor-pointer category-card">
-                    <img src="{{ asset('img/categories/elektronik.png') }}" class="object-contain w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 flex-shrink-0">
-                    <div class="flex-1 min-w-0">
-                        <h3 class="text-sm sm:text-base lg:text-lg xl:text-xl font-semibold">Elektronik</h3>
-                        <p class="text-xs sm:text-sm lg:text-base text-gray-500">
-                            Berbagai kebutuhan elektronik harian
-                        </p>
-                    </div>
-                </a>
-
-                {{-- CARD ROKOK --}}
-                <a href="#category-Rokok" class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 lg:p-5 xl:p-6 transition bg-white rounded-xl hover:bg-gray-100 hover:shadow-md cursor-pointer category-card">
-                    <img src="{{ asset('img/categories/rokok.png') }}" class="object-contain w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 flex-shrink-0">
-                    <div class="flex-1 min-w-0">
-                        <h3 class="text-sm sm:text-base lg:text-lg xl:text-xl font-semibold">Rokok</h3>
-                        <p class="text-xs sm:text-sm lg:text-base text-gray-500">
-                            Berbagai pilihan rokok
-                        </p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-
-    {{-- PRODUCT CATEGORIES SECTION --}}
-    <div id="product-categories" class="scroll-mt-20">
-        {{-- Group products by category --}}
-        @php
-            $groupedProducts = $products->groupBy('category');
-        @endphp
-
-        @foreach($groupedProducts as $categoryName => $categoryProducts)
-            <div id="category-{{ $categoryName }}" class="scroll-mt-20 product-carousel">
-                <x-category-carousel 
-                    title="{{ $categoryName }}"
-                    description="Berikut adalah produk {{ strtolower($categoryName) }} yang kami tawarkan"
-                    :products="$categoryProducts"
-                    :categoryName="$categoryName"
-                />
-            </div>
+                </div>
+            </section>
         @endforeach
     </div>
 
     <script src="scripts/homepage.js"></script>
 
-@endsection
-
-@section('page_scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Check if GSAP is loaded
-    if (typeof gsap === 'undefined') {
-        console.warn('GSAP not loaded, animations disabled');
-        return;
-    }
-
-    // ========================================
-    // RESPONSIVE CONFIGURATION
-    // ========================================
-    const isMobile = window.innerWidth < 768;
-    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
-    const isDesktop = window.innerWidth >= 1024 && window.innerWidth < 1920;
-    const is4K = window.innerWidth >= 1920;
-
-    // Animation config based on screen size
-    const animConfig = {
-        mobile: {
-            duration: 0.4,
-            stagger: 0.05,
-            distance: 25,
-            scale: 0.93
-        },
-        tablet: {
-            duration: 0.5,
-            stagger: 0.06,
-            distance: 30,
-            scale: 0.94
-        },
-        desktop: {
-            duration: 0.6,
-            stagger: 0.08,
-            distance: 35,
-            scale: 0.95
-        },
-        fourK: {
-            duration: 0.7,
-            stagger: 0.1,
-            distance: 40,
-            scale: 0.95
-        }
-    };
-
-    // Get current config
-    let config = animConfig.desktop;
-    if (isMobile) config = animConfig.mobile;
-    else if (isTablet) config = animConfig.tablet;
-    else if (is4K) config = animConfig.fourK;
-
-    // ========================================
-    // BANNER ANIMATION
-    // ========================================
-    gsap.from('.banner-content', {
-        opacity: 0,
-        y: isMobile ? 20 : 30,
-        duration: 0.5,
-        ease: 'power2.out',
-        clearProps: 'all'
-    });
-
-    if (!isMobile) {
-        gsap.from('.banner-image', {
-            opacity: 0,
-            scale: 0.92,
-            duration: 0.6,
-            delay: 0.15,
-            ease: 'back.out(1.1)',
-            clearProps: 'all'
-        });
-    }
-
-    // ========================================
-    // BEST ITEM SECTION
-    // ========================================
-    const bestItemSection = document.querySelector('.best-item-section');
-    if (bestItemSection) {
-        gsap.from('.best-item-title', {
-            scrollTrigger: {
-                trigger: '.best-item-section',
-                start: 'top 80%',
-                toggleActions: 'play none none reverse'
-            },
-            opacity: 0,
-            x: isMobile ? -20 : -30,
-            duration: 0.5,
-            ease: 'power2.out',
-            clearProps: 'all'
-        });
-
-        gsap.from('.best-item-card', {
-            scrollTrigger: {
-                trigger: '.best-item-section',
-                start: 'top 80%',
-                toggleActions: 'play none none reverse'
-            },
-            opacity: 0,
-            y: 25,
-            stagger: 0.06,
-            duration: 0.5,
-            ease: 'power2.out',
-            clearProps: 'all'
-        });
-    }
-
-    // ========================================
-    // OUR CATEGORY SECTION
-    // ========================================
-    const categorySection = document.querySelector('.category-section');
-    if (categorySection) {
-        gsap.from('.category-header', {
-            scrollTrigger: {
-                trigger: '.category-section',
-                start: 'top 80%',
-                toggleActions: 'play none none reverse'
-            },
-            opacity: 0,
-            y: 25,
-            duration: 0.5,
-            ease: 'power2.out',
-            clearProps: 'all'
-        });
-
-        gsap.from('.category-card', {
-            scrollTrigger: {
-                trigger: '.category-section',
-                start: 'top 70%',
-                toggleActions: 'play none none reverse'
-            },
-            opacity: 0,
-            scale: 0.94,
-            y: 20,
-            stagger: 0.08,
-            duration: 0.5,
-            ease: 'back.out(1.2)',
-            clearProps: 'all'
-        });
-    }
-
-    // ========================================
-    // PRODUCT CAROUSEL
-    // ========================================
-    const carousels = document.querySelectorAll('.product-carousel');
-    
-    carousels.forEach((carousel) => {
-        const header = carousel.querySelector('.carousel-header');
-        if (header) {
-            gsap.from(header, {
-                scrollTrigger: {
-                    trigger: carousel,
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse'
-                },
-                opacity: 0,
-                x: isMobile ? -15 : -25,
-                duration: 0.5,
-                ease: 'power2.out',
-                clearProps: 'all'
-            });
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
         }
 
-        const cards = carousel.querySelectorAll('.product-card');
-        if (cards.length > 0) {
-            gsap.from(cards, {
-                scrollTrigger: {
-                    trigger: carousel,
-                    start: 'top 75%',
-                    toggleActions: 'play none none reverse'
-                },
-                opacity: 0,
-                y: 30,
-                scale: 0.95,
-                stagger: 0.07,
-                duration: 0.5,
-                ease: 'power2.out',
-                clearProps: 'all'
-            });
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-    });
 
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 
-});
-</script>
 @endsection

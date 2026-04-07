@@ -39,7 +39,7 @@ class ProductController extends Controller
                 'price' => 'required|integer',
                 'category' => 'required|string',
                 'description' => 'nullable|string',
-                'image' => 'required|image|mimes:jpeg,png,jpg,JPG,gif',
+                'image' => 'required|image|mimes:webp,jpeg,png,jpg,JPG,gif',
                 'stock' => 'required|integer',
                 'status' => 'required|string',
             ]);
@@ -92,7 +92,7 @@ class ProductController extends Controller
                 'price' => 'required|integer',
                 'category' => 'required|string',
                 'description' => 'nullable|string',
-                'image' => 'required|image|mimes:jpeg,png,jpg,JPG,gif',
+                'image' => 'required|image|mimes:webp,jpeg,png,jpg,JPG,gif',
                 'stock' => 'required|integer',
                 'status' => 'required|string',
             ]);
